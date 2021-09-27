@@ -2,7 +2,7 @@
   "name": "cosmic-profanity",
   "version": "1.0.1",
   "description": "clean profanity from strings",
-  "main": "/build/index.js",
+  "main": "./build/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/KingCosmic/cosmic-profanity"
