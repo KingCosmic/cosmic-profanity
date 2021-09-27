@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const words_json_1 = __importDefault(require("./words.json"));
+const charmap_json_1 = __importDefault(require("./charmap.json"));
 class ProfanityFilter {
     static isProfane(content) {
         const words = content.split(' ');
@@ -41,5 +42,5 @@ class ProfanityFilter {
     }
 }
 ProfanityFilter.badwords = words_json_1.default;
-ProfanityFilter.numberToLetter = {};
+ProfanityFilter.numberToLetter = charmap_json_1.default;
 exports.default = ProfanityFilter;
