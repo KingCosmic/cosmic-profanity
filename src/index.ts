@@ -38,6 +38,11 @@ class ProfanityFilter {
   })
 
   /**
+   * should we bleep out the whole word? or just replace some of it.
+   */
+  static wholeWord:boolean = false
+
+  /**
    * does this string contain any profane words?
    */
   static isProfane(content:string):boolean {
@@ -74,7 +79,10 @@ class ProfanityFilter {
 
       // loop through our badwords
       for (let bw = 0; bw < this.badwords.length; bw++) {
-        words[w] = words[w].replace(this.badwords[bw], '**')
+
+        if (words[w].match(this.badwords[bw])) {
+          words[w] = (this.wholeWord) ? '****' : words[w].replace(this.badwords[bw], '****')
+        }
       }
     }
 

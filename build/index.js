@@ -20,7 +20,9 @@ class ProfanityFilter {
         const words = content.split(' ');
         for (let w = 0; w < words.length; w++) {
             for (let bw = 0; bw < this.badwords.length; bw++) {
-                words[w] = words[w].replace(this.badwords[bw], '**');
+                if (words[w].match(this.badwords[bw])) {
+                    words[w] = (this.wholeWord) ? '****' : words[w].replace(this.badwords[bw], '****');
+                }
             }
         }
         return words.join(' ');
@@ -56,4 +58,5 @@ ProfanityFilter.badwords = words_json_1.default.map(word => {
     word = word.replace(/\]\+/g, ']+[^\\w]*');
     return new RegExp(`(${word})`, 'ig');
 });
+ProfanityFilter.wholeWord = false;
 exports.default = ProfanityFilter;

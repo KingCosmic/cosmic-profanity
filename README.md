@@ -15,7 +15,7 @@ npm i cosmic-profanity
 ```Typescript
 import Filter from 'cosmic-profanity'
 // or
-var Filter = require('cosmic-profanity')
+var Filter = require('cosmic-profanity').default
 
 
 Filter.isProfane('I like big butts and I cannot lie')
@@ -29,4 +29,22 @@ Filter.clean('I like big butts (aka arses) and I cannot lie')
 ```
 
 ## Options
-Coming soon.
+
+### wholeWord
+determins if cleaning a string should remove the whole word
+or just some of it.
+
+```ts
+import Filter from 'cosmic-profanity'
+
+Filter.wholeWord = true
+
+Filter.clean('motherfucker')
+
+/**
+ * with wholeWord turned on "****"
+ * 
+ * with it turned off "mother****er"
+ */
+
+```
