@@ -45,14 +45,15 @@ ProfanityFilter.badwords = words_json_1.default.map(word => {
     word = word.replace(/p/g, '[p]+');
     word = word.replace(/q/g, '[q]+');
     word = word.replace(/r/g, '[r]+');
-    word = word.replace(/s/g, '[s5\\$]+');
-    word = word.replace(/t/g, '[t7\\+]+');
+    word = word.replace(/s/g, '[s5\$]+');
+    word = word.replace(/t/g, '[t7\+]+');
     word = word.replace(/u/g, '[u]+');
     word = word.replace(/v/g, '[v]+');
     word = word.replace(/w/g, '[w]+');
     word = word.replace(/x/g, '[x]+');
     word = word.replace(/y/g, '[y]+');
     word = word.replace(/z/g, '[z]+');
+    word = word.replace(/\]\+/g, ']+[^\\w]*');
     return new RegExp(`(${word})`, 'ig');
 });
 exports.default = ProfanityFilter;
