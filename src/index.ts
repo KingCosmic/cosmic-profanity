@@ -74,20 +74,37 @@ class ProfanityFilter {
     // split the string by words
     const words = content.split(' ')
 
-    // loop through our sentence
-    for (let w = 0; w < words.length; w++) {
+    let sentence = words.join('')
 
-      // loop through our badwords
-      for (let bw = 0; bw < this.badwords.length; bw++) {
+    let newString = ''
+    let currentIndex = 0
 
-        if (words[w].match(this.badwords[bw])) {
-          words[w] = (this.wholeWord) ? '****' : words[w].replace(this.badwords[bw], '****')
-        }
+    // loop through our badwords
+    for (let bw = 0; bw < this.badwords.length; bw++) {
+
+      const matches = sentence.match(this.badwords[bw])
+
+      if (!matches) continue
+
+      for (let m = 0; m < matches.length; m++) {
+        sentence = sentence.replace(matches[m], new Array(matches[m].length).fill('*', 0, matches[m].length).join(''))
       }
     }
 
+    // add our spaces back in.
+    for (let w = 0; w < words.length; w++) {
+      // add our word back in.
+      newString += sentence.substring(currentIndex, currentIndex + words[w].length)
+
+      // add a space
+      newString += ' '
+
+      // update our currentIndex
+      currentIndex += words[w].length
+    }
+
     // return a cleaned sentence.
-    return words.join(' ')
+    return newString.trim()
   }
 }
 

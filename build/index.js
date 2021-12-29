@@ -18,14 +18,23 @@ class ProfanityFilter {
     }
     static clean(content) {
         const words = content.split(' ');
-        for (let w = 0; w < words.length; w++) {
-            for (let bw = 0; bw < this.badwords.length; bw++) {
-                if (words[w].match(this.badwords[bw])) {
-                    words[w] = (this.wholeWord) ? '****' : words[w].replace(this.badwords[bw], '****');
-                }
+        let sentence = words.join('');
+        let newString = '';
+        let currentIndex = 0;
+        for (let bw = 0; bw < this.badwords.length; bw++) {
+            const matches = sentence.match(this.badwords[bw]);
+            if (!matches)
+                continue;
+            for (let m = 0; m < matches.length; m++) {
+                sentence = sentence.replace(matches[m], new Array(matches[m].length).fill('*', 0, matches[m].length).join(''));
             }
         }
-        return words.join(' ');
+        for (let w = 0; w < words.length; w++) {
+            newString += sentence.substring(currentIndex, currentIndex + words[w].length);
+            newString += ' ';
+            currentIndex += words[w].length;
+        }
+        return newString.trim();
     }
 }
 ProfanityFilter.badwords = words_json_1.default.map(word => {
